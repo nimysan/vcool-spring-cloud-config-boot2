@@ -31,7 +31,7 @@ pipeline {
         
         stage ('run docker image Stage') {
         	steps {
-        		sh 'docker run -d -p 8088:8088 springio/vcool-spring-cloud-config-boot2'
+        		sh 'docker run -d --restart=always -p 8088:8088 springio/vcool-spring-cloud-config-boot2'
         	}
         }
     }
