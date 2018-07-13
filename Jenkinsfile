@@ -1,21 +1,31 @@
-//Jenkinsfile (Declarative Pipeline)
 pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage ('package Stage') {
+
             steps {
-                echo 'Building..'
+                withMaven(maven : 'm3') {
+                    sh 'mvn clean package'
+                }
             }
         }
-        stage('Test') {
+
+        stage ('Testing Stage') {
+
             steps {
-                echo 'Testing..'
+                withMaven(maven : 'm3') {
+                    sh 'mvn test'
+                }
             }
         }
-        stage('Deploy') {
+
+
+        stage ('build docker image Stage') {
             steps {
-                echo 'Deploying....'
+                withMaven(maven : 'm3') {
+                    sh 'mvn dockerfile:build'
+                }
             }
         }
     }
